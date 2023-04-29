@@ -5,6 +5,7 @@
 }
 
 .wrapper {
+  border: red solid 2px;
   position: fixed;
   right: 0;
   bottom: 0;
