@@ -1,9 +1,11 @@
 import React from 'react';
-
-import Toast from '../Toast';
 import styles from './ToastShelf.module.css';
 
-function ToastShelf( {items} ) {
+import { ToastContext } from '../ToastProvider/ToastProvider';
+
+function ToastShelf() {
+
+  const { createdToasts: items } = React.useContext(ToastContext)
 
   const displayItems = items.map((item)=> {return (<li key={item.key} className={styles.toastWrapper}>{item.component}</li>)})
 
