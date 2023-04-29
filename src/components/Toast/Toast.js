@@ -27,8 +27,6 @@ function Toast({ message, messageVariant }) {
 
   const [showToast, setShowToast] = React.useState(true);
 
-  // const hiddenStyle = showToast ? "" : styles["hidden"];
-
   return (
     <div
       className={`${showToast ? '' : styles['hidden']} ${
