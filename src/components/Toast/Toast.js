@@ -11,8 +11,6 @@ import VisuallyHidden from '../VisuallyHidden';
 
 import styles from './Toast.module.css';
 
-
-
 const ICONS_BY_VARIANT = {
   notice: Info,
   warning: AlertTriangle,
@@ -20,30 +18,31 @@ const ICONS_BY_VARIANT = {
   error: AlertOctagon,
 };
 
-function Toast({message, messageVariant } ) {
+function Toast({ message, messageVariant }) {
+  let variantStyle = styles[messageVariant];
 
-  let variantStyle = styles[messageVariant]
+  const IconName = messageVariant
+    ? ICONS_BY_VARIANT[messageVariant]
+    : 'Info';
 
-  const IconName = messageVariant ? ICONS_BY_VARIANT[messageVariant] : "Info"
+  const [showToast, setShowToast] = React.useState(true);
 
-  const [ showToast, setShowToast ] = React.useState(true);
- 
-  function hideToast() {
-    setShowToast(false)
-  };
-
-  const hiddenStyle = showToast ? "" : "hidden";
-
+  // const hiddenStyle = showToast ? "" : styles["hidden"];
 
   return (
-    <div className={`${styles.toast} ${variantStyle}`}>
+    <div
+      className={`${showToast ? '' : styles['hidden']} ${
+        styles.toast
+      } ${variantStyle}`}
+    >
       <div className={styles.iconContainer}>
         <IconName size={24} />
       </div>
-      <p className={styles.content}>
-        {message}
-      </p>
-      <button className={styles.closeButton} onClick={hideToast}>
+      <p className={styles.content}>{message}</p>
+      <button
+        className={styles.closeButton}
+        onClick={() => setShowToast(false)}
+      >
         <X size={24} />
         <VisuallyHidden>Dismiss message</VisuallyHidden>
       </button>
