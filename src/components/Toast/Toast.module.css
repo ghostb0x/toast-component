@@ -1,6 +1,4 @@
-.hidden {
-  display: none;
-}
+
 .toast {
   position: relative;
   display: flex;
@@ -61,4 +59,8 @@
 }
 .error .iconContainer {
   color: var(--color-error);
+}
+
+.hidden {
+  display: none;
 }
