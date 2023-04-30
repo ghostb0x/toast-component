@@ -24,8 +24,6 @@ function Toast({ message, messageVariant, hidden }) {
     ? ICONS_BY_VARIANT[messageVariant]
     : 'Info';
 
-
-  
   const [showToast, setShowToast] = React.useState(true);
 
   return (
@@ -37,13 +35,18 @@ function Toast({ message, messageVariant, hidden }) {
       <div className={styles.iconContainer}>
         <IconName size={24} />
       </div>
-      <p className={styles.content}>{message}</p>
+      <p className={styles.content}>
+        <VisuallyHidden>{messageVariant} - </VisuallyHidden>
+        {message}
+      </p>
       <button
+        aria-label="Dismiss message"
+        aria-live="off"
         className={styles.closeButton}
         onClick={() => setShowToast(false)}
       >
         <X size={24} />
-        <VisuallyHidden>Dismiss message</VisuallyHidden>
+        
       </button>
     </div>
   );

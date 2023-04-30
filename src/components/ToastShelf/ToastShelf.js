@@ -10,29 +10,38 @@ function ToastShelf() {
   //move toast component definition into displayItems map, to allow
   // modification of hidden attribute
 
+  const displayItems = items.map(
+    ({ key, message, messageVariant, hidden }) => {
+      const toastComponent = (
+        <Toast
+          key={key}
+          message={message}
+          messageVariant={messageVariant}
+          hidden={hidden}
+        />
+      );
 
+      return (
+        <li
+          key={key}
+          className={styles.toastWrapper}
+        >
+          {toastComponent}
+        </li>
+      );
+    }
+  );
 
-  const displayItems = items.map(({key, message, messageVariant, hidden}) => {
-    const toastComponent = (
-      <Toast
-        key={key}
-        message={message}
-        messageVariant={messageVariant}
-        hidden={hidden}
-      />
-    );
-
-    return (
-      <li
-        key={key}
-        className={styles.toastWrapper}
-      >
-        {toastComponent}
-      </li>
-    );
-  });
-
-  return (<ol className={styles.wrapper}>{displayItems}</ol>);
+  return (
+    <ol
+      role="region"
+      aria-live="polite"
+      aria-label="Notification"
+      className={styles.wrapper}
+    >
+      {displayItems}
+    </ol>
+  );
 }
 
 export default ToastShelf;
