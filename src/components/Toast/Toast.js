@@ -8,7 +8,6 @@ import {
 } from 'react-feather';
 
 import VisuallyHidden from '../VisuallyHidden';
-
 import styles from './Toast.module.css';
 
 const ICONS_BY_VARIANT = {
@@ -18,13 +17,15 @@ const ICONS_BY_VARIANT = {
   error: AlertOctagon,
 };
 
-function Toast({ message, messageVariant }) {
+function Toast({ message, messageVariant, hidden }) {
   let variantStyle = styles[messageVariant];
 
   const IconName = messageVariant
     ? ICONS_BY_VARIANT[messageVariant]
     : 'Info';
 
+
+  
   const [showToast, setShowToast] = React.useState(true);
 
   return (
