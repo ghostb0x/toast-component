@@ -15,8 +15,7 @@ function ToastPlayground() {
 
   const [message, setMessage] = React.useState('');
 
-  const { createdToasts, createToast } =
-    React.useContext(ToastContext);
+  const { createdToasts, createToast } = React.useContext(ToastContext);
 
 
   function submitToast(receivedMessage, receivedVariant) {
@@ -35,7 +34,7 @@ function ToastPlayground() {
         <h1>Toast Playground</h1>
       </header>
 
-      <ToastShelf items={createdToasts} />
+      <ToastShelf />
 
       <form
         className={styles.controlsWrapper}
