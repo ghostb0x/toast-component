@@ -1,5 +1,5 @@
 import React from 'react';
-import Toast from '../Toast/Toast';
+import useEscapeKey from '../../hooks/useEscapeKey';
 
 export const ToastContext = React.createContext();
 
@@ -8,34 +8,7 @@ function ToastProvider({ children }) {
 
   const [createdToasts, setCreatedToasts] = React.useState([]);
 
-  const handleDismiss = (React.useCallback =
-    (() => {
-      const newArray = [...createdToasts];
-
-      newArray.array.forEach((element) => {
-        element.hidden = true;
-      });
-    },
-    [createdToasts]));
-
-  React.useEffect(() => {
-    function handleKeyDown(event) {
-      if (event.code === 'Escape') {
-        const newArray = [...createdToasts];
-
-        newArray.forEach((element) => {
-          element.hidden = true;
-        });
-
-        setCreatedToasts(newArray);
-      }
-    }
-    window.addEventListener('keydown', handleKeyDown);
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, []);
-
+  //create new toast and push to createdToasts array
   function createToast(receivedMessage, receivedVariant) {
     const key = crypto.randomUUID();
 
@@ -50,9 +23,16 @@ function ToastProvider({ children }) {
     setCreatedToasts(newArray);
   }
 
+  // escape key wipes all createdToasts
+  const handleEscape = React.useCallback(() => {
+    setCreatedToasts([]);
+  }, []);
+
+  //feed memoized callback to custom hook useEscapeKey
+  useEscapeKey(handleEscape);
+
   const contextValues = {
     createdToasts,
-    setCreatedToasts,
     createToast,
   };
 
